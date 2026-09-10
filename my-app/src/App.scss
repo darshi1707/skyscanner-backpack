@@ -1,45 +1,173 @@
-@import '~bpk-mixins';
-
-@mixin container {
-  max-width: $bpk-breakpoint-desktop;
-  margin: 0 auto;
-}
-
 .App {
-  text-align: center;
+  min-height: 100vh;
+  background-color: #f1f2f8;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
 
   &__header {
-    padding: $bpk-spacing-lg * 2;
-    background-color: $bpk-color-sky-blue;
-    background-image: $bpk-primary-gradient;
-    color: $bpk-color-white;
-
-    @include bpk-box-shadow-sm;
-
-    @include bpk-breakpoint-mobile {
-      padding: $bpk-spacing-xl;
-    }
-  }
-
-  &__header-inner {
-    @include container;
-  }
-
-  &__main {
-    padding: $bpk-spacing-xxl;
-
-    @include container;
-
-    @include bpk-breakpoint-mobile {
-      padding: $bpk-spacing-base;
-    }
+    background-color: #0770e3;
+    padding: 16px 32px;
   }
 
   &__heading {
-    margin-bottom: $bpk-spacing-sm;
+    color: #ffffff;
+    margin: 0;
   }
 
-  &__text {
-    margin-bottom: $bpk-spacing-sm;
+  &__main {
+    max-width: 960px;
+    margin: 24px auto;
+    width: 100%;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__split-container {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+
+  &__section {
+    flex: 1 1 50%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &:first-child {
+      @media (min-width: 769px) {
+        border-right: 1px solid #e3e5ec;
+        padding-right: 24px;
+      }
+    }
+  }
+
+  &__section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  &__badge {
+    background: #e8f0fe;
+    color: #0770e3;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+
+  &__controls {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+  }
+
+  &__select-group {
+    flex: 1 1 50%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #68697f;
+      text-transform: uppercase;
+    }
+
+    select {
+      width: 100%;
+      height: 38px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #c2c4cf;
+      background-color: #fff;
+    }
+  }
+
+  /* Calendar Table & Day styling */
+  &__calendar-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    th {
+      font-size: 12px;
+      font-weight: 600;
+      color: #68697f;
+      text-align: center;
+      padding-bottom: 8px;
+    }
+
+    td {
+      text-align: center;
+      padding: 3px 0;
+    }
+
+    /* Target Backpack Calendar Date buttons */
+    button {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: #111236;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+
+      &:hover:not(:disabled) {
+        background-color: #e3e5ec;
+      }
+
+      &:disabled {
+        color: #b2b2bf;
+        cursor: not-allowed;
+      }
+
+      /* Backpack selected date class variants */
+      &[aria-pressed="true"],
+      &[class*="selected"],
+      &[class*="--selected"] {
+        background-color: #0770e3 !important;
+        color: #ffffff !important;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__bottom-bar {
+    display: flex;
+    justify-content: flex-end;
   }
 }
